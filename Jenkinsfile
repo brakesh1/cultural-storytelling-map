@@ -96,7 +96,7 @@ pipeline {
                          --retry 10 \
                          --retry-delay 3 \
                          --retry-connrefused \
-                         http://localhost/api/
+                         http://localhost/
 
                     echo
                     echo "Narrify backend is healthy."
