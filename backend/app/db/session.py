@@ -5,7 +5,9 @@ from sqlalchemy.orm import Session, declarative_base, sessionmaker
 
 
 # sqlite database file inside backend folder
-DATABASE_URL = f"sqlite:///{Path(__file__).resolve().parents[2] / 'storymap.db'}"
+DATA_DIR = Path("/app/data")
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+DATABASE_URL = f"sqlite:///{DATA_DIR / 'storymap.db'}"
 
 # creates sqlalchemy engine for sqlite database
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})

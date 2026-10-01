@@ -1,0 +1,61 @@
+services:
+
+  backend:
+
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    container_name: narrify-backend
+
+    restart: unless-stopped
+
+    environment:
+      NARRIFY_DATA_DIR: /app/data
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GEMINI_MODEL: ${GEMINI_MODEL}
+      NARRIFY_AUTO_APPROVE: ${NARRIFY_AUTO_APPROVE}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      REPLICATE_API_TOKEN: ${REPLICATE_API_TOKEN}
+
+    volumes:
+      - narrify_data:/app/data
+      - narrify_uploads:/app/uploads
+
+    expose:
+      - "8000"
+
+    networks:
+      - narrify-network
+
+
+  frontend:
+
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    container_name: narrify-frontend
+
+    restart: unless-stopped
+
+    depends_on:
+      - backend
+
+    ports:
+      - "80:80"
+
+    networks:
+      - narrify-network
+
+
+volumes:
+
+  narrify_data:
+
+  narrify_uploads:
+
+
+networks:
+
+  narrify-network:
