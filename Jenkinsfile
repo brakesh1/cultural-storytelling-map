@@ -45,7 +45,7 @@ pipeline {
             steps {
                 sh '''
                     docker compose \
-                      --env-file /.env \
+                      --env-file /home/ubuntu/cultural-storytelling-map/.env \
                       config -q
 
                     echo "Compose configuration is valid."
@@ -58,7 +58,7 @@ pipeline {
             steps {
                 sh '''
                     docker compose \
-                      --env-file /.env \
+                      --env-file /home/ubuntu/cultural-storytelling-map/.env \
                       build
                 '''
             }
@@ -69,7 +69,7 @@ pipeline {
             steps {
                 sh '''
                     docker compose \
-                      --env-file /.env \
+                      --env-file /home/ubuntu/cultural-storytelling-map/.env \
                       up -d
                 '''
             }
@@ -80,7 +80,7 @@ pipeline {
             steps {
                 sh '''
                     docker compose \
-                      --env-file /.env \
+                      --env-file /home/ubuntu/cultural-storytelling-map/.env \
                       ps
                 '''
             }
@@ -119,19 +119,19 @@ pipeline {
 
             sh '''
                 docker compose \
-                  --env-file /.env \
+                  --env-file /home/ubuntu/cultural-storytelling-map/.env \
                   ps || true
 
                 echo "===== BACKEND LOGS ====="
 
                 docker compose \
-                  --env-file /.env \
+                  --env-file /home/ubuntu/cultural-storytelling-map/.env \
                   logs --tail=100 backend || true
 
                 echo "===== FRONTEND LOGS ====="
 
                 docker compose \
-                  --env-file /.env \
+                  --env-file /home/ubuntu/cultural-storytelling-map/.env \
                   logs --tail=100 frontend || true
             '''
         }
